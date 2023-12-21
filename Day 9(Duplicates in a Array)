@@ -1,0 +1,32 @@
+class Solution {
+    public static ArrayList<Integer> duplicates(int arr[], int n) {
+        // code here
+        ArrayList<Integer> duplicatesList = new ArrayList<>();
+        HashMap<Integer, Integer> frequencyMap = new HashMap<>();
+
+        
+        for (int num : arr) {
+            frequencyMap.put(num, frequencyMap.getOrDefault(num, 0) + 1);
+        }
+
+        
+        for (int key : frequencyMap.keySet()) {
+            if (frequencyMap.get(key) > 1) {
+                duplicatesList.add(key);
+            }
+        }
+
+        
+        if (duplicatesList.isEmpty()) {
+            duplicatesList.add(-1);
+        }
+
+        
+        Collections.sort(duplicatesList);
+
+        return duplicatesList;
+    }
+
+    
+}
+
