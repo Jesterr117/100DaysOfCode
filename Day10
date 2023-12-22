@@ -1,0 +1,27 @@
+class Solution
+{
+static ArrayList<Integer> subarraySum(int[] arr, int n, int s) {
+        int start = 0, end = 0;
+        int currSum = 0;
+        ArrayList<Integer> result = new ArrayList<>();
+
+        while (end < n) {
+            currSum += arr[end]; 
+            end++;
+
+            
+            while (currSum >= s && start < end) {
+                if (currSum == s) {
+                    result.add(start + 1); 
+                    result.add(end);
+                    return result;
+                }
+                currSum -= arr[start]; 
+                start++;
+            }
+        }
+
+        result.add(-1); 
+        return result;
+    }
+}
