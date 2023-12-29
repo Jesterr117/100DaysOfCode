@@ -1,0 +1,30 @@
+class Solution
+{
+    static int majorityElement(int a[], int size)
+    {
+        // your code here
+        int c = a[0];
+        int count = 1;
+
+        for (int i = 1; i < size; i++) {
+            if (a[i] == c) {
+                count++;
+            } else {
+                count--;
+                if (count == 0) {
+                    c = a[i];
+                    count = 1;
+                }
+            }
+        }
+
+        count = 0;
+        for (int value : a) {
+            if (value == c) {
+                count++;
+            }
+        }
+
+        return count > size / 2 ? c : -1;
+    }
+}
