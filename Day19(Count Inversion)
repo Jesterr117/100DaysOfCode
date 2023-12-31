@@ -1,0 +1,61 @@
+class Solution
+{
+    // arr[]: Input Array
+    // N : Size of the Array arr[]
+    //Function to count inversions in the array.
+    static long inversionCount(long arr[], long N)
+    {
+        // Your Code Here
+        return mergeSortAndCount(arr, 0, (int) (N - 1));
+    }
+
+    static long mergeSortAndCount(long[] arr, int left, int right) {
+        long invCount = 0;
+
+        if (left < right) {
+            int mid = left + (right - left) / 2;
+            invCount += mergeSortAndCount(arr, left, mid);
+            invCount += mergeSortAndCount(arr, mid + 1, right);
+            invCount += merge(arr, left, mid, right);
+        }
+
+        return invCount;
+    }
+
+    static long merge(long[] arr, int left, int mid, int right) {
+        int n1 = mid - left + 1;
+        int n2 = right - mid;
+        long[] leftArr = new long[n1];
+        long[] rightArr = new long[n2];
+
+        for (int i = 0; i < n1; ++i) {
+            leftArr[i] = arr[left + i];
+        }
+        for (int j = 0; j < n2; ++j) {
+            rightArr[j] = arr[mid + 1 + j];
+        }
+
+        int i = 0, j = 0;
+        int k = left;
+        long invCount = 0;
+
+        while (i < n1 && j < n2) {
+            if (leftArr[i] <= rightArr[j]) {
+                arr[k++] = leftArr[i++];
+            } else {
+                arr[k++] = rightArr[j++];
+                invCount += (n1 - i); 
+            }
+        }
+
+        while (i < n1) {
+            arr[k++] = leftArr[i++];
+        }
+
+        while (j < n2) {
+            arr[k++] = rightArr[j++];
+        }
+
+        return invCount;
+    }
+}
