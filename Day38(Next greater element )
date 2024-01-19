@@ -1,0 +1,27 @@
+class Solution
+{
+    //Function to find the next greater element for each element of the array.
+    public static long[] nextLargerElement(long[] arr, int n)
+    { 
+        // Your code here
+         long[] result = new long[n];
+        Arrays.fill(result, -1);
+
+        Stack<Integer> stack = new Stack<>();
+        Map<Integer, Integer> map = new HashMap<>();
+
+        for (int i = 0; i < n; i++) {
+            while (!stack.isEmpty() && arr[i] > arr[stack.peek()]) {
+                int index = stack.pop();
+                map.put(index, i);
+            }
+            stack.push(i);
+        }
+
+        for (Map.Entry<Integer, Integer> entry : map.entrySet()) {
+            result[entry.getKey()] = arr[entry.getValue()];
+        }
+
+        return result;
+    } 
+}
