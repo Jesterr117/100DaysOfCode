@@ -1,0 +1,14 @@
+class Solution{
+    static int trailingZeroes(int N){
+        // Write your code here
+        int count = 0;
+
+        
+        while (N >= 5) {
+            count += N / 5;
+            N /= 5;
+        }
+
+        return count;
+    }
+}
