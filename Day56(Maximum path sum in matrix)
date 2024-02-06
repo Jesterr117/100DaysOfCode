@@ -1,0 +1,31 @@
+int[][] dp = new int[N][N];
+        
+        // Initialize the last row of the dp array with the values of the last row of the matrix
+        for (int col = 0; col < N; col++) {
+            dp[N - 1][col] = Matrix[N - 1][col];
+        }
+        
+        // Traverse the matrix from bottom to top and calculate the maximum path sum
+        for (int row = N - 2; row >= 0; row--) {
+            for (int col = 0; col < N; col++) {
+                int maxSum = dp[row + 1][col]; // Maximum sum from below cell
+                
+                if (col > 0) {
+                    maxSum = Math.max(maxSum, dp[row + 1][col - 1]); // Maximum sum from below left cell
+                }
+                
+                if (col < N - 1) {
+                    maxSum = Math.max(maxSum, dp[row + 1][col + 1]); // Maximum sum from below right cell
+                }
+                
+                dp[row][col] = maxSum + Matrix[row][col]; // Add current cell value to the maximum sum
+            }
+        }
+        
+        // Find the maximum sum in the first row of the dp array
+        int maxSum = Integer.MIN_VALUE;
+        for (int col = 0; col < N; col++) {
+            maxSum = Math.max(maxSum, dp[0][col]);
+        }
+        
+        return maxSum;
