@@ -1,0 +1,18 @@
+class Solution {
+    static int minRepeats(String A, String B) {
+        // code here
+        if (A == null || B == null) {
+            return -1;
+        }
+
+        int repeated = (B.length() / A.length()) + 2; 
+
+        for (int i = 1; i <= repeated; i++) {
+            if (A.repeat(i).contains(B)) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
+};
