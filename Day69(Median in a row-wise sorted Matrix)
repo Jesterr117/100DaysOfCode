@@ -1,0 +1,27 @@
+class Solution {
+    int median(int matrix[][], int R, int C) {
+        // code here 
+        int[] flattened = new int[R * C];
+        int index = 0;
+        for (int i = 0; i < R; i++) {
+            for (int j = 0; j < C; j++) {
+                flattened[index++] = matrix[i][j];
+            }
+        }
+        
+      
+        Arrays.sort(flattened);
+        
+        
+        int totalElements = R * C;
+        if (totalElements % 2 == 1) {
+          
+            return flattened[totalElements / 2];
+        } else {
+           
+            int mid1 = totalElements / 2 - 1;
+            int mid2 = totalElements / 2;
+            return (flattened[mid1] + flattened[mid2]) / 2;
+        }
+    }
+}
