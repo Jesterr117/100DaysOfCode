@@ -1,0 +1,42 @@
+class Solution
+{
+    /*You are required to complete this method
+    * ar1 : 1st array
+    * ar2 : 2nd array
+    */
+    int maxPathSum(int ar1[], int ar2[])
+    {
+        // Your code here
+        int sumA = 0;
+        int sumB = 0;
+        int totalSum = 0;
+        
+        int i = 0, j = 0;
+        
+        while (i < ar1.length && j < ar2.length) {
+            if (ar1[i] < ar2[j]) {
+                sumA += ar1[i++];
+            } else if (ar1[i] > ar2[j]) {
+                sumB += ar2[j++];
+            } else {
+                totalSum += Math.max(sumA, sumB) + ar1[i];
+                sumA = 0;
+                sumB = 0;
+                i++;
+                j++;
+            }
+        }
+        
+        while (i < ar1.length) {
+            sumA += ar1[i++];
+        }
+        
+        while (j < ar2.length) {
+            sumB += ar2[j++];
+        }
+        
+        totalSum += Math.max(sumA, sumB);
+        
+        return totalSum;
+    }
+}
